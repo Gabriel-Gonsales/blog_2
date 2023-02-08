@@ -1,28 +1,24 @@
-<template>
+﻿<template>
     <b-container class="col-md-8" id="app">
-        <div id="post" class="bg-primary">
-            <InverterMsg message="" />
+        <div id="banner" class="bg-primary">
+            <BannerBlog tll="Aparece titulo"/>
         </div>
-        <div class="bg-warning">
-            <ArrayNomes message="" />
-        </div>
-        <div class="bg-warning">
-            <BlogPost/>
+        <div id="posts" class="">
+            <PostBlog class="post" tll="Olá" txt="Oi" />
+            <PostBlog class="post" tll="Olá" txt="Oi" />
         </div>
     </b-container>
 </template>
 
 <script>
-    import InverterMsg from './components/Inverter.vue'
-    import ArrayNomes from './components/Formulario.vue'
-    import BlogPost from './components/Padroes.vue'
+    import PostBlog from './components/Post.vue'
+    import BannerBlog from './components/Banner.vue'
 
 export default {
   name: 'App',
         components: {
-            InverterMsg,
-            ArrayNomes,
-            BlogPost
+            PostBlog,
+            BannerBlog
         }
     }
 </script>
@@ -36,5 +32,16 @@ export default {
         color: #2c3e50;
         margin-top: 10px;
     }
+
+    #posts{
+        margin-bottom: 10vh;
+        margin-top: 2vh;
+    }
+
+    .post{
+        margin-bottom: 1vh;
+        margin-top: 2vh;
+    }
+
 
 </style>
