@@ -3,13 +3,18 @@
         <div id="contentImg">
             <img class="col-md-12" id="ImagemContainer" v-bind:src="imagem" />
         </div>
-        <div class="bg-warning" id="contentTxt">
-            <h2 id="titulo">
-                {{titulo}}
-            </h2>
-            <p id="texto">
-                {{texto}}
-            </p>
+        <div class="bg-light" id="contentTxt">
+            <div class="" id="textos">
+                <h3 class="text-justify text-danger" id="titulo">
+                    <b>{{titulo}}</b>
+                </h3>
+                <p class="text-justify text-truncate" id="texto">
+                    {{texto}}
+                </p>
+                <router-link class="text-danger" to="PagPost.vue">
+                    Leia mais
+                </router-link>
+            </div>
         </div>
     </div>
 </template>
@@ -25,9 +30,9 @@
         },
         data() {
             return {
-                imagem: 'https://png.pngtree.com/thumb_back/fh260/background/20190222/ourmid/pngtree-simple-beige-banner-background-material-backgroundsimpleposter-backgroundbanner-backgroundbackground-image_51299.jpg',
-                titulo: 'Título legal',
-                texto: 'Textinho legal também'
+                imagem: this.img,
+                titulo: this.ttl,
+                texto: this.txt
             }
 
         }
@@ -41,17 +46,25 @@
     #conteinerPrincipal {
     }
 
-    #contentImg{
-
+    #contentImg {
+        background-size: 10vh contain;
     }
 
     #ImagemContainer{
-        max-height: 20vh;
         min-width: 100vh;
-
+        background-size: 10vh cover;
     }
 
     #contentTxt {
 
+    }
+
+    #textos{
+        margin-left: 10vh;
+        margin-right: 10vh;
+        padding-bottom: 2vh;
+    }
+    #titulo {
+        padding-top: 2vh;
     }
 </style>

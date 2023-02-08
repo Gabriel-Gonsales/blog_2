@@ -1,7 +1,7 @@
 ﻿<template>
     <div id="conteinerPrincipal">
-        <h1 id="titulo">
-            {{titulo}}
+        <h1 class="text-center " id="titulo">
+            <b>{{titulo}}</b>
         </h1>
     </div>
 </template>
@@ -15,7 +15,7 @@
         },
         data() {
             return {
-                titulo: 'Título legal'
+                titulo: this.ttl
             }
 
         }
@@ -28,18 +28,12 @@
 
     #conteinerPrincipal {
         background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20190222/ourmid/pngtree-simple-beige-banner-background-material-backgroundsimpleposter-backgroundbanner-backgroundbackground-image_51299.jpg");
+        padding-top: 10vh;
+        padding-bottom: .5vh;
     }
-
-    #contentImg{
-
-    }
-
     #ImagemContainer{
         max-height: 20vh;
 
     }
 
-    #contentTxt {
-
-    }
 </style>
