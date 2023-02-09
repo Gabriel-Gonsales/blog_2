@@ -4,7 +4,7 @@
             <div id="contentImg">
                 <img class="col-md-12" id="ImagemContainer" :src="imagem" />
             </div>
-            <b-container class="col-md-11">
+            <b-container class="col-md-10">
                 <div class="" id="textos">
                     <h3 class="text-danger" id="titulo">
                         <b>{{titulo}}</b>
