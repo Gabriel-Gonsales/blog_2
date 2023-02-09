@@ -4,7 +4,6 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import VueRouter from 'vue-router';
-import PagPost from './PagPost.vue';
 
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
@@ -15,12 +14,23 @@ Vue.config.productionTip = false
 const router = new VueRouter({
     routes: [
         {
+            path: '/Home',
+            name: 'Home',
+            component: () => import('./Home.vue')
+        },
+        {
             path: '/PagPost',
-            component: PagPost
-            }
-        ]
+            name: 'PagPost',
+            component: () => import('./PagPost.vue')
+        },
+        {
+            path: '/PagPost/:id',
+            name: 'PagPostId',
+            component: () => import('./PagPost.vue')
+        }
+    ]
 
-    })
+})
 
 new Vue({
     router,

@@ -1,7 +1,9 @@
 ﻿<template>
     <div id="conteinerPrincipal">
         <h1 class="text-center " id="titulo">
-            <b>{{titulo}}</b>
+            <router-link class="text-decoration-none text-danger" to="/Home">
+                <b>{{titulo}}</b>
+            </router-link>
         </h1>
     </div>
 </template>

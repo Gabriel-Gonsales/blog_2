@@ -4,36 +4,40 @@
             <div id="contentImg">
                 <img class="col-md-12" id="ImagemContainer" :src="imagem" />
             </div>
-            <div class="" id="textos">
-                <h3 class="text-danger" id="titulo">
-                    <b>{{titulo}}</b>
-                </h3>
-                <p id="texto">
-                    {{texto}}
-                </p>
-            </div>
+            <b-container class="col-md-11">
+                <div class="" id="textos">
+                    <h3 class="text-danger" id="titulo">
+                        <b>{{titulo}}</b>
+                    </h3>
+                    <p id="texto">
+                        {{texto}}
+                    </p>
+                </div>
+            </b-container>
         </div>
         <div class="bg-light">
-            <div id="coments" class="col-md-8">
-                <h2 class="text-danger">
-                    <b>Deixe seu comentário</b>
-                </h2>
-                <form id="formulario">
-                    <input v-model="nome" id="name" placeholder="Seu nome" class="col-md-12" type="text" />
-                    <br /><br />
-                    <textarea v-model="comentario" id="coment" placeholder="Deixe aqui seu comentário" class="col-md-12"></textarea>
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-danger col-md-4">Submit</button>
-                    </div>
-                </form>
-                <br />
-                <p class="text-danger">
-                    <b class="text-uppercase">{{nome}}</b> em {{data}}
-                </p>
-                <p class="text-break text-justify">
-                    {{comentario}}
-                </p>
-            </div>
+            <b-container class="col-md-10">
+                <div id="coments" class="">
+                    <h2 class="text-danger">
+                        <b>Deixe seu comentário</b>
+                    </h2>
+                    <form id="formulario">
+                        <input v-model="nome" id="name" placeholder="Seu nome" class="col-md-12" type="text" />
+                        <br /><br />
+                        <textarea v-model="comentario" id="coment" placeholder="Deixe aqui seu comentário" class="col-md-12"></textarea>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-danger col-md-4">Submit</button>
+                        </div>
+                    </form>
+                    <br />
+                    <p class="text-danger">
+                        <b class="text-uppercase">{{nome}}</b> em {{data}}
+                    </p>
+                    <p class="text-break text-justify">
+                        {{comentario}}
+                    </p>
+                </div>
+            </b-container>
         </div>
 
     </div>
@@ -68,26 +72,27 @@
 <style scoped>
 
     #ImagemContainer {
-        min-width: 100vh;
+        min-width: 50vw;
     }
 
     #textos {
-        margin-left: 10vh;
-        margin-right: 10vh;
         margin-top: 2vh;
         text-align: justify;
     }
 
+    #formulario{
+        margin-top: 2vh;
+    }
+
     #postG{
         padding-bottom: 2vh;
-        margin-bottom: 2vh;
+        margin-bottom: 1vh;
     }
 
     #coments {
-        margin-left: 18vh;
         padding-top: 2vh;
         text-align: justify;
-        margin-bottom: 20vh;
+        margin-bottom: 10vh;
         padding-bottom: 10vh;
     }
 
