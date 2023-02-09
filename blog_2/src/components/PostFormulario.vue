@@ -2,7 +2,7 @@
     <div>
         <div class="bg-light" id="postG">
             <div id="contentImg">
-                <img class="col-md-12" id="ImagemContainer" v-bind:src="imagem" />
+                <img class="col-md-12" id="ImagemContainer" :src="imagem" />
             </div>
             <div class="" id="textos">
                 <h3 class="text-danger" id="titulo">
@@ -30,7 +30,7 @@
                 <p class="text-danger">
                     <b class="text-uppercase">{{nome}}</b> em {{data}}
                 </p>
-                <p class="text-dark">
+                <p class="text-break text-justify">
                     {{comentario}}
                 </p>
             </div>

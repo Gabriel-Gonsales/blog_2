@@ -3,8 +3,9 @@
     "",
     "\\public",
     "\\src",
+    "\\src\\assets",
     "\\src\\components"
   ],
-  "SelectedNode": "\\package.json",
+  "SelectedNode": "\\src\\PagPost.vue",
   "PreviewInSolutionExplorer": false
 }

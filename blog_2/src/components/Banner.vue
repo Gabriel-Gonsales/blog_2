@@ -27,13 +27,13 @@
 <style scoped>
 
     #conteinerPrincipal {
-        background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20190222/ourmid/pngtree-simple-beige-banner-background-material-backgroundsimpleposter-backgroundbanner-backgroundbackground-image_51299.jpg");
+        background-image: url("https://png.pngtree.com/thumb_back/fw800/back_pic/05/05/72/6759687f9067428.jpg");
         padding-top: 10vh;
         padding-bottom: .5vh;
     }
-    #ImagemContainer{
+    #ImagemContainer {
         max-height: 20vh;
-
+        object-fit: cover;
     }
 
 </style>

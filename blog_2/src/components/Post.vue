@@ -11,8 +11,8 @@
                 <p class="text-justify text-truncate" id="texto">
                     {{texto}}
                 </p>
-                <router-link class="text-danger" to="PagPost.vue">
-                    Leia mais
+                 <router-link class="text-danger" to="PagPost.vue">
+                   Leia mais
                 </router-link>
             </div>
         </div>
@@ -50,9 +50,10 @@
         background-size: 10vh contain;
     }
 
-    #ImagemContainer{
+    #ImagemContainer {
         min-width: 100vh;
-        background-size: 10vh cover;
+        max-height: 30vh;
+        object-fit: cover;
     }
 
     #contentTxt {
