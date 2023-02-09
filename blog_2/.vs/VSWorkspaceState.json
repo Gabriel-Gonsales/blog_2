@@ -2,10 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\public",
+    "\\public\\images",
     "\\src",
     "\\src\\assets",
     "\\src\\components"
   ],
-  "SelectedNode": "\\src\\PagPost.vue",
+  "SelectedNode": "\\src\\components\\Inverter.vue",
   "PreviewInSolutionExplorer": false
 }
