@@ -1,5 +1,5 @@
 ﻿<template>
-    <div id="conteinerPrincipal">
+    <div class="col-12" id="conteinerPrincipal">
         <h1 class="text-center " id="titulo">
             <router-link class="text-decoration-none text-danger" to="/Home">
                 <b>{{titulo}}</b>

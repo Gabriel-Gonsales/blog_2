@@ -2,7 +2,7 @@
     <div>
         <div class="bg-light" id="postG">
             <div id="contentImg">
-                <img class="col-md-12" id="ImagemContainer" :src="imagem" />
+                <img class="col-12" id="ImagemContainer" :src="imagem" />
             </div>
             <b-container class="col-md-10">
                 <div class="" id="textos">
