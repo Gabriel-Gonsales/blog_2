@@ -62,7 +62,44 @@
                 nome: 'Seu nome',
                 data: '08/02/2023'
             }
+        },
+        methods: {
+            /*makeRequest() {
+                var axios = require('axios');
+                var data = '';
 
+                var config = {
+                    method: 'get',
+                    maxBodyLength: Infinity,
+                    url: 'https://localhost:51427/api/Post/v1/asc/5/1',
+                    headers: {
+                        'Accept': 'text/plain'
+                    },
+                    data: data
+                };
+
+                axios(config)
+                    .then(function (response) {
+                        response => this.posts = JSON.stringify(response.data);
+                        console.log(JSON.stringify(response.data));
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }*/
+
+            async makeRequest() {
+                const axios = require('axios');
+                const response = await axios("https://localhost:51427/api/Post/v1");
+                const data = response.data;
+                console.log(data);
+                console.log(data[0]);
+                this.posts = data;
+            }
+        },
+        created() {
+            this.makeRequest()
         }
     }
 

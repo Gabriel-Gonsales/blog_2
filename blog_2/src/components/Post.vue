@@ -2,7 +2,7 @@
     <div id="conteinerPrincipal">
         <router-link class="" :to="{name: 'PagPostId',params: {id:idPost}}">
             <div id="contentImg">
-                <img class="col-12" id="ImagemContainer" v-bind:src="imagem" />
+                <img class="col-12" id="ImagemContainer" :src="imagem" />
             </div>
         </router-link>
 
@@ -28,14 +28,14 @@
     export default {
         name: 'PostBlog',
         props: {
-            idp: String,
+            idp: Number,
             img: String,
             ttl: String,
             txt: String
         },
         data() {
             return {
-                idPost: this.idp,
+                idPost: parseInt(this.idp) - 1,
                 imagem: this.img,
                 titulo: this.ttl,
                 texto: this.txt

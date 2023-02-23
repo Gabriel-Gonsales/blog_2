@@ -3,9 +3,9 @@
         <b-container class="col-md-8" id="app">
             <div id="posts" class="">
                 <PostForm
-                          :img="posts[Id].imagem"
-                          :ttl="posts[Id].titulo"
-                          :txt="posts[Id].texto"
+                          :img="posts[Id].image"
+                          :ttl="posts[Id].title"
+                          :txt="posts[Id].description"
                           class="post" />
             </div>
         </b-container>
@@ -25,24 +25,46 @@
         data() {
             return {
                 Id: this.$route.params.id,
-                posts: [
-                    {
-                        imagem: "images/parque.jpg",
-                        titulo: "Parque das sequoias",
-                        texto: "A Sequoia sempervirens, é popularmente chamada de sequoia sempre verde, chega a mais de 90 metros de altura, aproximadamente o mesmo que um edifício de 30 andares. Os galhos mais baixos ficam a 45 metros de distância do chão e seu tronco pode chegar a medir 3 metros de diâmetro. A coloração desta árvore pode variar entre o castanho-avermelhado e o castanho-canela, sua casca pode possuir em média de 15 a 30 cm e sulcos profundos. Nos últimos anos esta espécie tem sido plantada no sul do Brasil para fins ornamentais. Um exemplar da espécie foi apelidada de Hyperion, a maior árvore do mundo, que foi descoberta em 2006 em São Francisco, medindo 115,55 metros."
-                    },
-                    {
-                        imagem: "images/pandinha.jpg",
-                        titulo: "Os pandas vermelhos",
-                        texto: "O panda-vermelho (Ailurus fulgens), também conhecido como panda-pequeno, raposa-de-fogo ou gato-de-fogo, é um pequeno mamífero arborícola, sendo a única espécie existente do gênero Ailurus. Este animal pertence à família Ailuridae, mas já foi classificado como sendo das famílias Procyonidae (guaxinim) e Ursidae (ursos)."
-                    },
-                    {
-                        imagem: "images/bootstrap.png",
-                        titulo: "O tal do Bootstrap",
-                        texto: "Crie projetos responsivos para dispositivos móveis na web com a biblioteca de componentes front-end mais popular do mundo.O Bootstrap é uma ferramenta gratuita para desenvolvimento HTML, CSS e JS.Crie protótipos rápidamente ou aplicações completas com nossas variáveis e mixins Sass, sistemas de grid responsivo, componentes pré- construídos e poderosos plugins com jQuery."
-                    }
-                ]
+                posts: []
             };
+        },
+        methods: {
+            /*makeRequest() {
+                var axios = require('axios');
+                var data = '';
+
+                var config = {
+                    method: 'get',
+                    maxBodyLength: Infinity,
+                    url: 'https://localhost:51427/api/Post/v1/asc/5/1',
+                    headers: {
+                        'Accept': 'text/plain'
+                    },
+                    data: data
+                };
+
+                axios(config)
+                    .then(function (response) {
+                        response => this.posts = JSON.stringify(response.data);
+                        console.log(JSON.stringify(response.data));
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }*/
+
+            async makeRequest() {
+                const axios = require('axios');
+                const response = await axios("https://localhost:51427/api/Post/v1");
+                const data = response.data;
+                console.log(data);
+                console.log(data[0]);
+                this.posts = data;
+            }
+        },
+        created() {
+            this.makeRequest()
         }
     }
 </script>
