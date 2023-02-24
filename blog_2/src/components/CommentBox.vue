@@ -28,23 +28,6 @@
                 data: this.date
             }
 
-        },
-        methods: {
-            /*async roundDate() {
-                const options = {
-                    year: 'numeric',
-                    month: 'long',
-                    weekday: 'long',
-                    day: 'numeric',
-                    hour: 'numeric',
-                    minute: 'numeric',
-                    second: 'numeric'
-                }
-                return this.data.toLocaleDateString('pt-br', options)
-            }*/
-        },
-        created(){
-            //this.roundDate()
         }
     }
 
