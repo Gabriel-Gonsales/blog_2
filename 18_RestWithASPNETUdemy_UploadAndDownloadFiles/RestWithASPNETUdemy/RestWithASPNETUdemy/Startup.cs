@@ -68,7 +68,6 @@ namespace RestWithASPNETUdemy
 
             var filterOptions = new HyperMediaFilterOptions();
             filterOptions.ContentResponseEnricherList.Add(new PersonEnricher());
-            filterOptions.ContentResponseEnricherList.Add(new BookEnricher());
 
             services.AddSingleton(filterOptions);
 
@@ -95,12 +94,13 @@ namespace RestWithASPNETUdemy
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
-            services.AddScoped<IBookBusiness, BookBusinessImplementation>();
+            services.AddScoped<ICommentBusiness, CommentBusinessImplementation>();
             services.AddScoped<IPostBusiness, PostBusinessImplementation>();
             services.AddScoped<IFileBusiness, FileBusinessImplementation>();
 
             services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
 
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
         }

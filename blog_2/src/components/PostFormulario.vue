@@ -21,7 +21,7 @@
                     <h2 class="text-danger">
                         <b>Deixe seu comentário</b>
                     </h2>
-                    <form id="formulario">
+                    <form id="formulario" @submit="createComment()">
                         <input v-model="nome" id="name" placeholder="Seu nome" class="col-md-12" type="text" />
                         <br /><br />
                         <textarea v-model="comentario" id="coment" placeholder="Deixe aqui seu comentário" class="col-md-12"></textarea>
@@ -30,12 +30,12 @@
                         </div>
                     </form>
                     <br />
-                    <p class="text-danger">
-                        <b class="text-uppercase">{{nome}}</b> em {{data}}
-                    </p>
-                    <p class="text-break text-justify">
-                        {{comentario}}
-                    </p>
+                    <ComentariosPost v-for="(comment) in comments"
+                                     :key="comment.id"
+                                     :cmt="comment.content"
+                                     :name="comment.personName"
+                                     :date="comment.postDate"
+                                     class="post"></ComentariosPost>
                 </div>
             </b-container>
         </div>
@@ -45,61 +45,74 @@
 </template>
 
 <script>
+    import ComentariosPost from './CommentBox.vue'
 
     export default {
         name: 'PostForm',
+        components: {
+            ComentariosPost
+        },
         props: {
+            id: String,
             img: String,
             ttl: String,
-            txt: String
+            txt: String,
+            cmt: String
         },
         data() {
             return {
+                comments: [],
+                pId: this.id,
                 imagem: this.img,
                 titulo: this.ttl,
                 texto: this.txt,
-                comentario: 'Deixe aqui seu comentário',
-                nome: 'Seu nome',
-                data: '08/02/2023'
+                comentario: '',
+                nome: '',
+                data: ''
             }
         },
         methods: {
-            /*makeRequest() {
-                var axios = require('axios');
-                var data = '';
 
-                var config = {
-                    method: 'get',
-                    maxBodyLength: Infinity,
-                    url: 'https://localhost:51427/api/Post/v1/asc/5/1',
-                    headers: {
-                        'Accept': 'text/plain'
-                    },
-                    data: data
-                };
-
-                axios(config)
-                    .then(function (response) {
-                        response => this.posts = JSON.stringify(response.data);
-                        console.log(JSON.stringify(response.data));
-
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            }*/
-
-            async makeRequest() {
+            async makePostRequest() {
                 const axios = require('axios');
                 const response = await axios("https://localhost:51427/api/Post/v1");
                 const data = response.data;
                 console.log(data);
                 console.log(data[0]);
                 this.posts = data;
+            },
+            async makeCommentRequest() {
+                const axios = require('axios');
+                const response = await axios("https://localhost:51427/api/Comment/v1/findByPostId?Id=" + this.pId);
+                const data = response.data;
+                console.log(data);
+                console.log(data[0]);
+                this.comments = data;
+            },
+            async createComment() {
+                console.log("Criou!")
+
+                const data = {
+                    content: this.comentario,
+                    PersonName: this.nome,
+                    postDate: new Date(),
+                    postId: this.pId
+                }
+                const dataJSON = JSON.stringify(data);
+                console.log(dataJSON);
+                const response = await fetch("https://localhost:51427/api/Comment/v1", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: dataJSON
+                });
+                const res = await response.json();
+                console.log(res);
+                this.makeCommentRequest();
             }
         },
         created() {
-            this.makeRequest()
+            this.makePostRequest()
+            this.makeCommentRequest()
         }
     }
 

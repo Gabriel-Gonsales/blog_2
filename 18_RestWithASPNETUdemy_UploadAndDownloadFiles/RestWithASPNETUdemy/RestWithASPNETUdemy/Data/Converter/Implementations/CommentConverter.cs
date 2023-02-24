@@ -6,41 +6,41 @@ using System.Linq;
 
 namespace RestWithASPNETUdemy.Data.Converter.Implementations
 {
-    public class BookConverter : IParser<BookVO, Book>, IParser<Book, BookVO>
+    public class CommentConverter : IParser<CommentVO, Comment>, IParser<Comment, CommentVO>
     {
-        public Book Parse(BookVO origin)
+        public Comment Parse(CommentVO origin)
         {
             if (origin == null) return null;
-            return new Book
+            return new Comment
             {
                 Id = origin.Id,
-                Author = origin.Author,
-                LaunchDate = origin.LaunchDate,
-                Price = origin.Price,
-                Title = origin.Title
+                Content = origin.Content,
+                PersonName = origin.PersonName,
+                PostDate = origin.PostDate,
+                PostId= origin.PostId
             };
         }
 
-        public BookVO Parse(Book origin)
+        public CommentVO Parse(Comment origin)
         {
             if (origin == null) return null;
-            return new BookVO
+            return new CommentVO
             {
                 Id = origin.Id,
-                Author = origin.Author,
-                LaunchDate = origin.LaunchDate,
-                Price = origin.Price,
-                Title = origin.Title
+                Content = origin.Content,
+                PersonName = origin.PersonName,
+                PostDate = origin.PostDate,
+                PostId = origin.PostId
             };
         }
 
-        public List<Book> Parse(List<BookVO> origin)
+        public List<Comment> Parse(List<CommentVO> origin)
         {
             if (origin == null) return null;
             return origin.Select(item => Parse(item)).ToList();
         }
 
-        public List<BookVO> Parse(List<Book> origin)
+        public List<CommentVO> Parse(List<Comment> origin)
         {
             if (origin == null) return null;
             return origin.Select(item => Parse(item)).ToList();

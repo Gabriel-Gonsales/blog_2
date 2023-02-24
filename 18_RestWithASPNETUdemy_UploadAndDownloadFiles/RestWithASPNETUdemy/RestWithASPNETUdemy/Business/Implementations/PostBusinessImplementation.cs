@@ -64,7 +64,7 @@ namespace RestWithASPNETUdemy.Business.Implementations
 
             string query = @"select * from posts p where 1 = 1 ";
             if (!string.IsNullOrWhiteSpace(title)) query = query + $" and p.titulo like '%{title}%' ";
-            query += $" order by p.titulo {sort} limit {size} offset {offset}";
+            query += $" order by p.id {sort} limit {size} offset {offset}";
 
             string countQuery = @"select count(*) from posts p where 1 = 1 ";
             if (!string.IsNullOrWhiteSpace(title)) countQuery = countQuery + $" and p.titulo like '%{title}%' ";
