@@ -2,58 +2,47 @@
     <div id="fundo" class="col-md-12">
         <b-container class="col-md-8" id="app">
             <div id="posts" class="">
-                <!--<div class="col-md-12 d-flex justify-content-around">
+                <div class="col-md-12 d-flex justify-content-around">
                     <button class="btn btn-outline-none col-md-2 bg-white">
                         <router-link class="text-decoration-none text-danger" to="/CadastroPost">
                             <b>Cadastro</b>
                         </router-link>
-                        <router-view></router-view>
                     </button>
-                </div>-->
-                <div class="">
-                    <form>
-                        <input class="search col-12 col-md-12 col-sm-12" placeholder="Pesquise posts" type="text" v-model.lazy="search" />
-                        <hr id="linha"/>
-                        <button class="text-danger col-12  col-sm-12 search bg-white" @click="achaTitulo(search)" type="submit">
-                            <b>Pesquisar</b>
-                        </button>
-                    </form>
                 </div>
-                <PostBlog v-for="(post) in posts"
-                          :key="post.id"
-                          :idp="post.id"
-                          :img="post.image"
-                          :ttl="post.title"
-                          :txt="post.description"
-                          class="post" />
+                <form>
+                    <input class="col-md-6" type="text" v-model.lazy="search" />
+                    <button class="col-md-2" @click="achaTitulo(search)" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg>
+                    </button>
+                </form>
+
             </div>
             <div class="col-md-12 d-flex justify-content-around">
-                <button @click="clickmenos()" class="text-danger btn btn-outline-none col-6 col-sm-4 col-md-2 bg-white" v-if="anterior">
-                    <b>Anterior</b>
+                <button @click="clickmenos()" class="btn btn-outline-none col-md-2 bg-white" v-if="anterior">
+                    Anterior
                 </button>
-                <button @click="clickmais()" class="text-danger btn btn-outline-none col-6 col-sm-4 col-md-2 bg-white" v-if="proximo">
-                    <b>Próximo</b>
+                <button @click="clickmais()" class="btn btn-outline-none col-md-2 bg-white" v-if="proximo">
+                    Próximo
                 </button>
             </div>
 
-</b-container>
+        </b-container>
     </div>
 
 </template>
 
 <script>
 
-import PostBlog from './components/Post.vue'
-
     export default {
-        name: 'HomeSite',
+        name: 'CadastroPost',
         components: {
-            PostBlog
         },
         data() {
             return {
                 posts: [],
-                pagina: localStorage.pagina,
+                pagina: 1,
                 anterior: true,
                 proximo: true,
                 search: ''
@@ -103,7 +92,7 @@ import PostBlog from './components/Post.vue'
                 this.pagina--;
                 this.makeRequest();
             },
-            async makeRequest() {
+            async makeRequest (){
                 const axios = require('axios');     
                 var response = null;
                 response = await axios("https://localhost:51427/api/Post/v1/asc/5/"+this.pagina);
@@ -113,13 +102,8 @@ import PostBlog from './components/Post.vue'
 
                 this.pagina == 1?this.anterior = false : this.anterior = true;
 
-                this.pagina * data.currentPage >= data.totalResults ? this.proximo = false : this.proximo = true;
-
-                localStorage.setItem('pagina', this.pagina);
-                console.log(localStorage.pagina);
-                console.log(this.pagina);
+                this.pagina*data.currentPage >= data.totalResults?this.proximo = false : this.proximo = true;
             }
-
         },
         created() {
             this.makeRequest()
@@ -144,6 +128,7 @@ import PostBlog from './components/Post.vue'
     }
 
     .post{
+        margin-bottom: 1vh;
         margin-top: 2vh;
     }
 
@@ -153,13 +138,5 @@ import PostBlog from './components/Post.vue'
     }
     .btn {
         --bs-btn-border-radius: 0rem;
-    }
-    .search{
-        border: none;
-        margin-right: 1vh;
-        text-align: center;
-    }
-    #linha{
-        margin: 0vh;
     }
 </style>

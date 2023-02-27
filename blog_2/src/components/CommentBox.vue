@@ -3,7 +3,7 @@
         <div id="coments" class="">
             <br />
             <p class="text-danger">
-                <b class="text-uppercase">{{nome}}</b> em {{data}}
+                <b class="text-uppercase">{{nome}}</b> em {{DS[0]}} às {{DS[1]}}
             </p>
             <p class="text-break text-justify">
                 {{comentario}}
@@ -25,9 +25,18 @@
             return {
                 comentario: this.cmt,
                 nome: this.name,
-                data: this.date
+                data: this.date,
+                DS: []
             }
 
+        },
+        methods: {
+            async dataSplit(){
+                this.DS = this.data.split("T");
+            }
+        },
+        created() {
+            this.dataSplit()
         }
     }
 

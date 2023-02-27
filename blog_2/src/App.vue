@@ -1,10 +1,10 @@
 ﻿<template>
-    <div id="fundo" class="">
-        <b-container id="banner" class="items col-8">
+    <div id="fundo" class="items col-12">
+        <b-container id="banner" class="items col-md-8">
             <BannerBlog ttl="Blog do Gabu" />
         </b-container>
         <router-view></router-view>
-        <b-container id="banner" class="items col-8">
+        <b-container id="banner" class="items col-md-8">
             <FooterBlog ttl="Blog do Gabu" />
         </b-container>
     </div>
