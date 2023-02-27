@@ -2,14 +2,13 @@
     <div id="fundo" class="col-md-12">
         <b-container class="col-md-8" id="app">
             <div id="posts" class="">
-                <!--<div class="col-md-12 d-flex justify-content-around">
+                <div class="col-md-12 d-flex justify-content-around">
                     <button class="btn btn-outline-none col-md-2 bg-white">
                         <router-link class="text-decoration-none text-danger" to="/CadastroPost">
                             <b>Cadastro</b>
                         </router-link>
-                        <router-view></router-view>
                     </button>
-                </div>-->
+                </div>
                 <div class="">
                     <form>
                         <input class="search col-12 col-md-12 col-sm-12" placeholder="Pesquise posts" type="text" v-model.lazy="search" />
@@ -60,30 +59,6 @@ import PostBlog from './components/Post.vue'
             };
         },
         methods: {
-            /*makeRequest() {
-                var axios = require('axios');
-                var data = '';
-
-                var config = {
-                    method: 'get',
-                    maxBodyLength: Infinity,
-                    url: 'https://localhost:51427/api/Post/v1/asc/5/1',
-                    headers: {
-                        'Accept': 'text/plain'
-                    },
-                    data: data
-                };
-
-                axios(config)
-                    .then(function (response) {
-                        response => this.posts = JSON.stringify(response.data);
-                        console.log(JSON.stringify(response.data));
-
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            }*/
             async achaTitulo() {
                 const axios = require('axios');
                 var response = null;
@@ -113,7 +88,7 @@ import PostBlog from './components/Post.vue'
 
                 this.pagina == 1?this.anterior = false : this.anterior = true;
 
-                this.pagina * data.currentPage >= data.totalResults ? this.proximo = false : this.proximo = true;
+                this.pagina * data.pageSize >= data.totalResults ? this.proximo = false : this.proximo = true;
 
                 localStorage.setItem('pagina', this.pagina);
                 console.log(localStorage.pagina);

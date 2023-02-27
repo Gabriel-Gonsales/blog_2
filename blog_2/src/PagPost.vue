@@ -38,7 +38,6 @@
                 const response = await axios("https://localhost:51427/api/Post/v1");
                 const data = response.data;
                 console.log(data);
-                console.log(data[0]);
                 this.posts = data;
             },
             async makeCommentRequest() {
@@ -46,7 +45,6 @@
                 const response = await axios("https://localhost:51427/api/Comment/v1/findByPostId?Id=" + this.Id);
                 const data = response.data;
                 console.log(data);
-                console.log(data[0]);
                 this.comments = data;
             }
         },

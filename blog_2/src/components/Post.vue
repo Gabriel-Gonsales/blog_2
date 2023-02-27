@@ -17,7 +17,6 @@
                 <router-link class="text-danger" :to="{name: 'PagPostId',params: {id:idPost}}">
                     Leia mais
                 </router-link>
-                <router-view></router-view>
             </div>
         </div>
     </div>

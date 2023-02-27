@@ -29,8 +29,8 @@ const router = new VueRouter({
             component: () => import('./PagPost.vue')
         },
         {
-            path: '/CadastoPost',
-            name: 'CadastrosPosts',
+            path: '/CadastroPost',
+            name: 'CadastrosPost',
             component: () => import('./CadastroPost.vue')
         }
     ]
