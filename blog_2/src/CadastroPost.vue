@@ -25,7 +25,7 @@
 </template>
 
 <script>
-//import axios from "axios";
+import axios from "axios";
     
 
     export default {
@@ -43,7 +43,7 @@
             };
         },
         methods: {
-            readFile(file) {
+            /*readFile(file) {
                 return new Promise((resolve, reject) => {
                     // Create file reader
                     let reader = new FileReader()
@@ -55,16 +55,24 @@
                     // Read file
                     reader.readAsArrayBuffer(file)
                 })
-            },
+            },*/
 
-            async getAsByteArray(file) {
+            /*async getAsByteArray(file) {
                 return new Uint8Array(await this.readFile(file))
-            },
+            },*/
 
             async createPost() {
                 if (this.VF) {
                     const fd = new FormData();
-                    fd.append('arquivo', this.arquivo)
+                    fd.append('file', this.arquivo, this.arquivo.name)
+                    axios.post('https://localhost:51427/api/File/v1/uploadFile', fd, {
+                        onUploadProgress: uploadEvent => {
+                            console.log('Progresso: ' + Math.round(uploadEvent.loaded / uploadEvent.total * 100) + '%')
+                        }
+                    }).then(res => {
+                        console.log(res)
+                    });
+                    this.arquivo = null;
                 }
 
                 //const byteFile = await this.getAsByteArray(this.arquivo)
@@ -87,7 +95,6 @@
                 });
                 const res = await response.json();
                 console.log(res);
-                console.log(this.arquivo)
 
                 this.imagem = '';
                 this.descricao = '';

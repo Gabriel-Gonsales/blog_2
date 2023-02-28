@@ -62,7 +62,7 @@ namespace RestWithASPNETUdemy.Business.Implementations
             var size = (pageSize < 1) ? 10 : pageSize;
             var offset = page > 0 ? (page - 1) * size : 0;
 
-            string query = @"select * from posts p where 1 = 1 ";
+            string query = @"select * from posts p where p.enabled = 1";
             if (!string.IsNullOrWhiteSpace(title)) query = query + $" and p.titulo like '%{title}%' ";
             query += $" order by p.id {sort} limit {size} offset {offset}";
 

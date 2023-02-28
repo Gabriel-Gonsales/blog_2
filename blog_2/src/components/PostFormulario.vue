@@ -22,9 +22,9 @@
                         <b>Deixe seu comentário</b>
                     </h2>
                     <form class="" id="formulario" @submit="createComment()">
-                        <input required v-model="nome" id="name" placeholder="Seu nome" class="form-control col-12 col-sm-12 col-md-12" type="text" />
+                        <input v-model="nome" id="name" placeholder="Seu nome" class="form-control col-12 col-sm-12 col-md-12" type="text" />
                         <br />
-                        <textarea required v-model="comentario" id="coment" placeholder="Deixe aqui seu comentário" class="form-control col-12 col-sm-12 col-md-12"></textarea>
+                        <textarea v-model="comentario" id="coment" placeholder="Deixe aqui seu comentário" class="form-control col-12 col-sm-12 col-md-12"></textarea>
                         <div class="d-flex justify-content-around">
                             <button type="submit" class="btn btn-danger col-md-4">Submit</button>
                         </div>

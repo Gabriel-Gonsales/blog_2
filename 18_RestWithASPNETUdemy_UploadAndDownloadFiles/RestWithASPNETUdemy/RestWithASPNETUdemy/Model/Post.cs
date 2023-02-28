@@ -20,6 +20,9 @@ namespace RestWithASPNETUdemy.Model
         [Column("arq")]
         public byte[] Arquivo { get; set; }
 
+        [Column("enabled")]
+        public bool Enabled { get; set; }
+
     }
 
 }
