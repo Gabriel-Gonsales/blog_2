@@ -11,6 +11,7 @@ namespace RestWithASPNETUdemy.Data.VO
         public string Title { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
+        public byte[] Arquivo { get; set; }
         public List<HyperMediaLink> Links { get; set; } = new List<HyperMediaLink>();
 
     }

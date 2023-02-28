@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
     
 
     export default {
@@ -38,30 +38,45 @@ import axios from "axios";
                 descricao: '',
                 titulo: '',
                 arquivo: null,
-                VF: false
+                VF: false,
+                fileByteArray: []
             };
         },
         methods: {
-            async createPost() {
-                console.log("Criou!")
+            readFile(file) {
+                return new Promise((resolve, reject) => {
+                    // Create file reader
+                    let reader = new FileReader()
 
+                    // Register event listeners
+                    reader.addEventListener("loadend", e => resolve(e.target.result))
+                    reader.addEventListener("error", reject)
+
+                    // Read file
+                    reader.readAsArrayBuffer(file)
+                })
+            },
+
+            async getAsByteArray(file) {
+                return new Uint8Array(await this.readFile(file))
+            },
+
+            async createPost() {
                 if (this.VF) {
                     const fd = new FormData();
-                    fd.append('file', this.arquivo, this.arquivo.name)
-                    axios.post('https://localhost:51427/api/File/v1/uploadFile', fd, {
-                        onUploadProgress: uploadEvent => {
-                            console.log('Progresso: ' + Math.round(uploadEvent.loaded / uploadEvent.total * 100) + '%')
-                        }
-                    }).then(res => {
-                        console.log(res)
-                    });
-                    this.arquivo = null;
+                    fd.append('arquivo', this.arquivo)
                 }
+
+                //const byteFile = await this.getAsByteArray(this.arquivo)
+                //this.fileByteArray = await byteFile
+
+                //console.log(this.byteFile)
 
                 const data = {
                     description: this.descricao,
                     title: this.titulo,
-                    image: this.imagem
+                    image: this.imagem,
+                    //arquivo: this.fileByteArray
                 }
                 const dataJSON = JSON.stringify(data);
                 console.log(dataJSON);
@@ -72,6 +87,7 @@ import axios from "axios";
                 });
                 const res = await response.json();
                 console.log(res);
+                console.log(this.arquivo)
 
                 this.imagem = '';
                 this.descricao = '';
@@ -83,23 +99,6 @@ import axios from "axios";
                 this.arquivo = event.target.files[0];
                 console.log(this.arquivo);
             },
-            /*async createArq() {
-                const fd = new FormData();
-                fd.append('file', this.arquivo, this.arquivo.name)
-                axios.post('https://localhost:51427/api/File/v1/uploadFile', fd, {
-                    onUploadProgress: uploadEvent => {
-                        console.log('Progresso: ' + Math.round(uploadEvent.loaded / uploadEvent.total * 100) + '%')
-                    }
-                }).then(res => {
-                    console.log(res)
-                });
-                this.arquivo = null;
-            }*/
-        },
-        created() {
-        },
-        watch: {
-
         }
     }
 </script>

@@ -1,4 +1,5 @@
-﻿using RestWithASPNETUdemy.Model.Base;
+﻿using RestWithASPNETUdemy.Data.VO;
+using RestWithASPNETUdemy.Model.Base;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,6 +16,9 @@ namespace RestWithASPNETUdemy.Model
 
         [Column("imagem")]
         public string Image { get; set; }
+
+        [Column("arq")]
+        public byte[] Arquivo { get; set; }
 
     }
 
