@@ -3,11 +3,11 @@
         <b-container class="col-md-8" id="app">
             <h2 class="text-danger"><b>Cadastro de posts</b></h2>
             <form class="" id="formulario" @submit="createPost()">
-                <input v-model="titulo" id="titulo" placeholder="Escreva o título" class="form-control col-12 col-sm-12 col-md-12" type="text" />
+                <input required v-model="titulo" id="titulo" placeholder="Escreva o título" class="form-control col-12 col-sm-12 col-md-12" type="text" />
                 <br />
-                <textarea v-model="descricao" id="descricao" placeholder="Escreva o conteúdo" class="form-control col-12 col-sm-12 col-md-12"></textarea>
+                <textarea required v-model="descricao" id="descricao" placeholder="Escreva o conteúdo" class="form-control col-12 col-sm-12 col-md-12"></textarea>
                 <br />
-                <input v-model="imagem" id="imagem" placeholder="Link da imagem" class="form-control col-12 col-sm-12 col-md-12" type="text" />
+                <input required v-model="imagem" id="imagem" placeholder="Link da imagem" class="form-control col-12 col-sm-12 col-md-12" type="text" />
                 <br />
                 <input v-model="VF" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                 <label class="form-check-label text-center" for="flexCheckDefault">
