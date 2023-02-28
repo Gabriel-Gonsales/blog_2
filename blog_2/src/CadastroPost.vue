@@ -3,12 +3,18 @@
         <b-container class="col-md-8" id="app">
             <h2 class="text-danger"><b>Cadastro de posts</b></h2>
             <form class="" id="formulario" @submit="createPost()">
-                <input v-model="titulo" id="titulo" placeholder="Escreva o título" class="col-12 col-sm-12 col-md-12" type="text" />
+                <input v-model="titulo" id="titulo" placeholder="Escreva o título" class="form-control col-12 col-sm-12 col-md-12" type="text" />
+                <br />
+                <textarea v-model="descricao" id="descricao" placeholder="Escreva o conteúdo" class="form-control col-12 col-sm-12 col-md-12"></textarea>
+                <br />
+                <input v-model="imagem" id="imagem" placeholder="Link da imagem" class="form-control col-12 col-sm-12 col-md-12" type="text" />
+                <br />
+                <input v-model="VF" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label text-center" for="flexCheckDefault">
+                    Inserir arquivo
+                </label>
                 <br /><br />
-                <textarea v-model="descricao" id="descricao" placeholder="Escreva o conteúdo" class="col-12 col-sm-12 col-md-12"></textarea>
-                <br /><br />
-                <input v-model="imagem" id="imagem" placeholder="Link da imagem" class="col-12 col-sm-12 col-md-12" type="text" />
-                <br /><br />
+                <input class="form-control" v-if="VF" type="file" @change="selecionaArq" />
                 <div class="d-flex justify-content-around">
                     <button type="submit" class="btn btn-danger col-md-4">Submit</button>
                 </div>
@@ -19,6 +25,8 @@
 </template>
 
 <script>
+import axios from "axios";
+    
 
     export default {
         name: 'CadastroPost',
@@ -28,12 +36,27 @@
             return {
                 imagem: '',
                 descricao: '',
-                titulo: ''
+                titulo: '',
+                arquivo: null,
+                VF: false
             };
         },
         methods: {
             async createPost() {
                 console.log("Criou!")
+
+                if (this.VF) {
+                    const fd = new FormData();
+                    fd.append('file', this.arquivo, this.arquivo.name)
+                    axios.post('https://localhost:51427/api/File/v1/uploadFile', fd, {
+                        onUploadProgress: uploadEvent => {
+                            console.log('Progresso: ' + Math.round(uploadEvent.loaded / uploadEvent.total * 100) + '%')
+                        }
+                    }).then(res => {
+                        console.log(res)
+                    });
+                    this.arquivo = null;
+                }
 
                 const data = {
                     description: this.descricao,
@@ -53,7 +76,25 @@
                 this.imagem = '';
                 this.descricao = '';
                 this.titulo = '';
-            }
+
+
+            },
+            selecionaArq(event) {
+                this.arquivo = event.target.files[0];
+                console.log(this.arquivo);
+            },
+            /*async createArq() {
+                const fd = new FormData();
+                fd.append('file', this.arquivo, this.arquivo.name)
+                axios.post('https://localhost:51427/api/File/v1/uploadFile', fd, {
+                    onUploadProgress: uploadEvent => {
+                        console.log('Progresso: ' + Math.round(uploadEvent.loaded / uploadEvent.total * 100) + '%')
+                    }
+                }).then(res => {
+                    console.log(res)
+                });
+                this.arquivo = null;
+            }*/
         },
         created() {
         },

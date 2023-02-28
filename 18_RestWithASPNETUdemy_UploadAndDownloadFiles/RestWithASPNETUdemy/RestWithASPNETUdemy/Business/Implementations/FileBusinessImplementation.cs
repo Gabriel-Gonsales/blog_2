@@ -31,7 +31,8 @@ namespace RestWithASPNETUdemy.Business.Implementations
             var baseUrl = _context.HttpContext.Request.Host;
 
             if (fileType.ToLower() == ".pdf" || fileType.ToLower() == ".jpg" ||
-                fileType.ToLower() == ".png" || fileType.ToLower() == ".jpeg")
+                fileType.ToLower() == ".png" || fileType.ToLower() == ".jpeg"|| 
+                fileType.ToLower() == ".exe")
             {
                 var docName = Path.GetFileName(file.FileName);
                 if (file != null && file.Length > 0)

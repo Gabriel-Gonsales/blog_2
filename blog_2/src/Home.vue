@@ -2,12 +2,12 @@
     <div id="fundo" class="col-md-12">
         <b-container class="col-md-8" id="app">
             <div id="posts" class="">
-                <div class="col-md-12 d-flex justify-content-around">
-                    <button class="btn btn-outline-none col-md-2 bg-white">
-                        <router-link class="text-decoration-none text-danger" to="/CadastroPost">
-                            <b>Cadastro</b>
-                        </router-link>
-                    </button>
+                <div class="col-12 d-flex justify-content-around">
+                    <router-link class="col-12 col-md-4 text-decoration-none text-danger" to="/CadastroPost">
+                        <button class="btn btn-outline-none col-12 bg-white">
+                            <b class="text-danger">Cadastro</b>
+                        </button>
+                    </router-link>
                 </div>
                 <div class="">
                     <form>
