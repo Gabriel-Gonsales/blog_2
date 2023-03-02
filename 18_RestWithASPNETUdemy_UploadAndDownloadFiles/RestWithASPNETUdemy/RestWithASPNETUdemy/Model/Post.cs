@@ -18,7 +18,7 @@ namespace RestWithASPNETUdemy.Model
         public string FileName { get; set; }
 
         [Column("enabled")]
-        public bool Enabled { get; set; }
+        public int Enabled { get; set; }
 
     }
 

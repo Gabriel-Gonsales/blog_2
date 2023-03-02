@@ -1,39 +1,41 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
-using RestWithASPNETUdemy.Model.Context;
+using Microsoft.Net.Http.Headers;
+using Microsoft.OpenApi.Models;
 using RestWithASPNETUdemy.Business;
 using RestWithASPNETUdemy.Business.Implementations;
+using RestWithASPNETUdemy.Hypermedia.Enricher;
+using RestWithASPNETUdemy.Hypermedia.Filters;
+using RestWithASPNETUdemy.Model.Context;
 using RestWithASPNETUdemy.Repository;
+using RestWithASPNETUdemy.Repository.Generic;
 using Serilog;
 using System;
 using System.Collections.Generic;
-using RestWithASPNETUdemy.Repository.Generic;
-using Microsoft.Net.Http.Headers;
-using RestWithASPNETUdemy.Hypermedia.Filters;
-using RestWithASPNETUdemy.Hypermedia.Enricher;
-using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Rewrite;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.AspNetCore.Http;
 
 namespace RestWithASPNETUdemy
 {
     public class Startup
     {
         public IConfiguration Configuration { get; }
-        public IWebHostEnvironment Environment { get; }
+        public IWebHostEnvironment _Environment { get; }
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
-            Environment = environment;
+            _Environment = environment;
 
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
                 .CreateLogger();
+
+            //Console.WriteLine(GetEnvironmentVariable("windir"));
         }
 
         // Adição de serviços no container
@@ -51,8 +53,8 @@ namespace RestWithASPNETUdemy
 
             var connection = Configuration["MySQLConnection:MySQLConnectionString"];
             services.AddDbContext<MySQLContext>(options => options.UseMySql(connection));
-            
-            if (Environment.IsDevelopment())
+
+            if (_Environment.IsDevelopment())
             {
                 MigrateDatabase(connection);
             }
@@ -74,7 +76,8 @@ namespace RestWithASPNETUdemy
             //Versionamento de APIs
             services.AddApiVersioning();
 
-            services.AddSwaggerGen(c => {
+            services.AddSwaggerGen(c =>
+            {
                 c.SwaggerDoc("v1",
                     new OpenApiInfo
                     {
@@ -109,6 +112,8 @@ namespace RestWithASPNETUdemy
         // Linhas de request HTTP
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            System.Diagnostics.Debug.WriteLine(Environment.GetEnvironmentVariable("PORT"));
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -124,7 +129,8 @@ namespace RestWithASPNETUdemy
 
             app.UseSwagger();
 
-            app.UseSwaggerUI(c => {
+            app.UseSwaggerUI(c =>
+            {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json",
                     "REST API's From 0 to Azure with ASP.NET Core 5 and Docker - v1");
             });

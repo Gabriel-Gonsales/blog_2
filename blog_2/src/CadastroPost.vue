@@ -18,7 +18,9 @@
 </template>
 
 <script>
-import axios from "axios";
+    import axios from "axios";
+    import profiles from '../../18_RestWithASPNETUdemy_UploadAndDownloadFiles/RestWithASPNETUdemy/RestWithASPNETUdemy/Properties/launchSettings.json'
+
     
 
     export default {
@@ -34,31 +36,12 @@ import axios from "axios";
                 arquivo: null,
                 arquivos: [],
                 arqNome: '',
-                fileByteArray: []
+                json: profiles.profiles.RestWithASPNETUdemy.applicationUrl.split(";")
             };
         },
         methods: {
-            /*readFile(file) {
-                return new Promise((resolve, reject) => {
-                    // Create file reader
-                    let reader = new FileReader()
-
-                    // Register event listeners
-                    reader.addEventListener("loadend", e => resolve(e.target.result))
-                    reader.addEventListener("error", reject)
-
-                    // Read file
-                    reader.readAsArrayBuffer(file)
-                })
-            },*/
-
-            /*async getAsByteArray(file) {
-                return new Uint8Array(await this.readFile(file))
-            },*/
-
             async createPost() {
                 let fd = new FormData();
-
 
                 console.log(this.arquivos)           
                 if (this.arquivos.length > 1) {
@@ -83,36 +66,34 @@ import axios from "axios";
                         }
                     }).then(res => {
                         console.log(res)
+                        console.log(res.status)
                     });
                     this.arquivo = null;
                 }
-
-                //const byteFile = await this.getAsByteArray(this.arquivo)
-                //this.fileByteArray = await byteFile
-
-                //console.log(this.byteFile)
 
                 const data = {
                     description: this.descricao,
                     title: this.titulo,
                     enabled: this.enabled,
                     fileName: this.arqNome
-                    //arquivo: this.fileByteArray
                 }
                 const dataJSON = JSON.stringify(data);
                 console.log(dataJSON);
-                const response = await fetch("https://localhost:51427/api/Post/v1", {
+                const response = await fetch(this.json[0] + "/api/Post/v1", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: dataJSON
-                });
+                })
                 const res = await response.json();
                 console.log(res);
+
+                this.$alert("Post cadastrado com sucesso!");
 
                 this.imagem = '';
                 this.descricao = '';
                 this.titulo = '';
 
+                this.$router.push({ name: 'Home' });
 
             },
             selecionaArq(event) {
@@ -132,7 +113,9 @@ import axios from "axios";
                 }
                 console.log(this.arquivos);
                 console.log(this.arquivos.length);
-            },
+            }
+        },
+        created() {
         }
     }
 </script>

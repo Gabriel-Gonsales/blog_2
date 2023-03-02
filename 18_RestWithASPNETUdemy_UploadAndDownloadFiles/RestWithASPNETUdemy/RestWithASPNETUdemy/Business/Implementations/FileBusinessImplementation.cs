@@ -30,7 +30,7 @@ namespace RestWithASPNETUdemy.Business.Implementations
             var fileType = Path.GetExtension(file.FileName);
             var baseUrl = _context.HttpContext.Request.Host;
 
-            if (fileType.ToLower() == ".jpg" ||
+            if (fileType.ToLower() == ".jpg" || fileType.ToLower() == ".webp" ||
                 fileType.ToLower() == ".png" || fileType.ToLower() == ".jpeg")
             {
                 var docName = Path.GetFileName(file.FileName);

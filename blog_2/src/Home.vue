@@ -42,7 +42,8 @@
 
 <script>
 
-import PostBlog from './components/Post.vue'
+    import PostBlog from './components/Post.vue'
+    import profiles from '../../18_RestWithASPNETUdemy_UploadAndDownloadFiles/RestWithASPNETUdemy/RestWithASPNETUdemy/Properties/launchSettings.json'
 
     export default {
         name: 'HomeSite',
@@ -55,20 +56,33 @@ import PostBlog from './components/Post.vue'
                 pagina: localStorage.pagina,
                 anterior: true,
                 proximo: true,
-                search: ''
+                search: '',
+                json: profiles.profiles.RestWithASPNETUdemy.applicationUrl.split(";")
             };
         },
         methods: {
             async achaTitulo() {
                 const axios = require('axios');
                 var response = null;
-                response = await axios("https://localhost:51427/api/Post/v1/findPostByTitle?title=" + this.search);
+                response = await axios(this.json[0] + "/api/Post/v1/findPostByTitle?title=" + this.search);
                 const data = response.data;
                 console.log(data);
+
+                if (data.length == 0) {
+                    this.$alert("Não foi possível localizar um post com este título.");
+                    this.makeRequest();
+                    this.search = '';
+                }
+
                 this.posts = data;
 
                 this.anterior = false;
                 this.proximo = false;
+
+                if (this.search == '') {
+                    this.makeRequest();
+                }
+
             },
             clickmais(){
                 this.pagina++;
@@ -93,11 +107,15 @@ import PostBlog from './components/Post.vue'
                 localStorage.setItem('pagina', this.pagina);
                 console.log(localStorage.pagina);
                 console.log(this.pagina);
+            },
+            async testes() {
+                console.log(this.json[0]);
             }
 
         },
         created() {
-            this.makeRequest()
+            this.makeRequest(),
+            this.testes()
         },
         watch: {
 

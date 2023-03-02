@@ -36,13 +36,12 @@ namespace RestWithASPNETUdemy.Repository
             if (!string.IsNullOrWhiteSpace(title))
             {
                 return _context.Posts.Where(
-                    p => (p.Title.Contains(title)) && p.Enabled).ToList();
+                    p => (p.Title.Contains(title)) && p.Enabled.Equals(1)).ToList();
             }
             else{
                 return _context.Posts.Where(
-                    p => p.Enabled).ToList();
+                    p => p.Enabled.Equals(1)).ToList();
             }
-            return null;
         }
     }
 }
