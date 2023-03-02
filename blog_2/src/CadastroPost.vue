@@ -7,14 +7,7 @@
                 <br />
                 <textarea required v-model="descricao" id="descricao" placeholder="Escreva o conteúdo" class="form-control col-12 col-sm-12 col-md-12"></textarea>
                 <br />
-                <input required v-model="imagem" id="imagem" placeholder="Link da imagem" class="form-control col-12 col-sm-12 col-md-12" type="text" />
-                <br />
-                <input v-model="VF" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label text-center" for="flexCheckDefault">
-                    Inserir arquivo
-                </label>
-                <br /><br />
-                <input class="form-control" v-if="VF" type="file" @change="selecionaArq" />
+                <input required class="form-control" type="file" @change="selecionaArq"/>
                 <div class="d-flex justify-content-around">
                     <button type="submit" class="btn btn-danger col-md-4">Submit</button>
                 </div>
@@ -37,8 +30,10 @@ import axios from "axios";
                 imagem: '',
                 descricao: '',
                 titulo: '',
+                enabled: 1,
                 arquivo: null,
-                VF: false,
+                arquivos: [],
+                arqNome: '',
                 fileByteArray: []
             };
         },
@@ -62,8 +57,25 @@ import axios from "axios";
             },*/
 
             async createPost() {
-                if (this.VF) {
-                    const fd = new FormData();
+                let fd = new FormData();
+
+
+                console.log(this.arquivos)           
+                if (this.arquivos.length > 1) {
+                    console.log(this.arquivos)
+                    fd.append('file', this.arquivos)
+                    axios.post('https://localhost:51427/api/File/v1/uploadMultipleFiles', fd, {
+                        onUploadProgress: uploadEvent => {
+                            console.log('Progresso: ' + Math.round(uploadEvent.loaded / uploadEvent.total * 100) + '%')
+                        }
+                    }).then(res => {
+                        console.log(res)
+                    });
+                    this.arquivos = null;
+                }
+                else {
+                    this.arqNome = this.arquivo.name;
+                    console.log(this.arqNome);
                     fd.append('file', this.arquivo, this.arquivo.name)
                     axios.post('https://localhost:51427/api/File/v1/uploadFile', fd, {
                         onUploadProgress: uploadEvent => {
@@ -83,7 +95,8 @@ import axios from "axios";
                 const data = {
                     description: this.descricao,
                     title: this.titulo,
-                    image: this.imagem,
+                    enabled: this.enabled,
+                    fileName: this.arqNome
                     //arquivo: this.fileByteArray
                 }
                 const dataJSON = JSON.stringify(data);
@@ -103,8 +116,22 @@ import axios from "axios";
 
             },
             selecionaArq(event) {
-                this.arquivo = event.target.files[0];
-                console.log(this.arquivo);
+                console.log(event.target.files);
+                console.log(event.target.files.length)
+
+                if (event.target.files.length > 1) {
+                    for (var i = 0; i < event.target.files.length; i++) {
+                        let file = event.target.files[i];
+                        console.log(file);
+                        this.arquivos[i] = file;
+                    }
+                }
+                else{
+                    let file = event.target.files[0];
+                    this.arquivo = file;
+                }
+                console.log(this.arquivos);
+                console.log(this.arquivos.length);
             },
         }
     }

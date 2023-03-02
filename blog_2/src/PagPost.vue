@@ -3,7 +3,7 @@
         <b-container class="col-md-8" id="app">
             <div id="posts" class="">
                 <PostForm
-                :img="posts[Id].image"
+                :img="posts[Id].fileName"
                 :id="this.$route.params.id"
                 :ttl="posts[Id].title"
                 :txt="posts[Id].description"

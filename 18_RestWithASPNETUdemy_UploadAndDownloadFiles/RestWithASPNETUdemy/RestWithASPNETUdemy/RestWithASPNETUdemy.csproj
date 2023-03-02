@@ -18,7 +18,25 @@
 
   <ItemGroup>
     <Folder Include="Configurations\" />
-    <Folder Include="UploadDir\" />
+    <Folder Include="wwwroot\UploadDir\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\UploadDir\960x0.jpg" />
+    <None Include="wwwroot\UploadDir\boat-new-slider.jpg" />
+    <None Include="wwwroot\UploadDir\bootstrap.png" />
+    <None Include="wwwroot\UploadDir\comunicado_02_2023.jpg" />
+    <None Include="wwwroot\UploadDir\GuiaDocker.pdf" />
+    <None Include="wwwroot\UploadDir\hubble_30dor_potw2305a_main.jpg" />
+    <None Include="wwwroot\UploadDir\kubernetes-thumb.png" />
+    <None Include="wwwroot\UploadDir\kubernetes-thumb2.png" />
+    <None Include="wwwroot\UploadDir\leaf.png" />
+    <None Include="wwwroot\UploadDir\original.pdf" />
+    <None Include="wwwroot\UploadDir\pandinha.jpg" />
+    <None Include="wwwroot\UploadDir\parque.jpg" />
+    <None Include="wwwroot\UploadDir\pexels-pixabay-235621.jpg" />
+    <None Include="wwwroot\UploadDir\pia16613_orig.jpg" />
+    <None Include="wwwroot\UploadDir\stock-photo-small-dog-astronaut-in-the-universe-lost-spaceship-2033579321.jpg" />
   </ItemGroup>
 
 </Project>

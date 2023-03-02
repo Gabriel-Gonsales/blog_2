@@ -35,7 +35,7 @@
         data() {
             return {
                 idPost: parseInt(this.idp) - 1,
-                imagem: this.img,
+                imagem: "https://localhost:51427/UploadDir/" + this.img,
                 titulo: this.ttl,
                 texto: this.txt
             }

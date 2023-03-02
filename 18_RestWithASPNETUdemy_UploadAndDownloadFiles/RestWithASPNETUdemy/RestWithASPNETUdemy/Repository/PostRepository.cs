@@ -11,7 +11,7 @@ namespace RestWithASPNETUdemy.Repository
     {
         public PostRepository(MySQLContext context) : base (context) { }
 
-        /*public Person Disable(long id)
+        /*public Post Disable(long id)
         {
             if (!_context.Persons.Any(p => p.Id.Equals(id))) return null;
             var user = _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
@@ -36,7 +36,11 @@ namespace RestWithASPNETUdemy.Repository
             if (!string.IsNullOrWhiteSpace(title))
             {
                 return _context.Posts.Where(
-                    p => p.Title.Contains(title)).ToList();
+                    p => (p.Title.Contains(title)) && p.Enabled).ToList();
+            }
+            else{
+                return _context.Posts.Where(
+                    p => p.Enabled).ToList();
             }
             return null;
         }

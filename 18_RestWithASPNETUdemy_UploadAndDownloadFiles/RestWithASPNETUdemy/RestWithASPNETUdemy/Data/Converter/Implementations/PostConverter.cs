@@ -16,8 +16,7 @@ namespace RestWithASPNETUdemy.Data.Converter.Implementations
                 Id = origin.Id,
                 Description = origin.Description,
                 Title = origin.Title,
-                Image = origin.Image,
-                Arquivo = origin.Arquivo
+                FileName = origin.FileName
             };
         }
 
@@ -29,8 +28,7 @@ namespace RestWithASPNETUdemy.Data.Converter.Implementations
                 Id = origin.Id,
                 Description = origin.Description,
                 Title = origin.Title,
-                Image = origin.Image,
-                Arquivo = origin.Arquivo
+                FileName = origin.FileName
             };
         }
 

@@ -14,11 +14,8 @@ namespace RestWithASPNETUdemy.Model
         [Column("descricao")]
         public string Description { get; set; }
 
-        [Column("imagem")]
-        public string Image { get; set; }
-
-        [Column("arq")]
-        public byte[] Arquivo { get; set; }
+        [Column("file_name")]
+        public string FileName { get; set; }
 
         [Column("enabled")]
         public bool Enabled { get; set; }

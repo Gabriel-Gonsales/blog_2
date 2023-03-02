@@ -5,7 +5,7 @@
                 <div class="col-12 d-flex justify-content-around">
                     <router-link class="col-12 col-md-4 text-decoration-none text-danger" to="/CadastroPost">
                         <button class="btn btn-outline-none col-12 bg-white">
-                            <b class="text-danger">Cadastro</b>
+                            <b class="text-danger">Cadastro de posts</b>
                         </button>
                     </router-link>
                 </div>
@@ -21,7 +21,7 @@
                 <PostBlog v-for="(post) in posts"
                           :key="post.id"
                           :idp="post.id"
-                          :img="post.image"
+                          :img="post.fileName"
                           :ttl="post.title"
                           :txt="post.description"
                           class="post" />

@@ -14,7 +14,7 @@ namespace RestWithASPNETUdemy.Business.Implementations
         public FileBusinessImplementation(IHttpContextAccessor context)
         {
             _context = context;
-            _basePath = Directory.GetCurrentDirectory() + "\\UploadDir\\";
+            _basePath = Directory.GetCurrentDirectory() + "\\wwwroot\\UploadDir\\";
         }
 
         public byte[] GetFile(string filename)
@@ -30,9 +30,8 @@ namespace RestWithASPNETUdemy.Business.Implementations
             var fileType = Path.GetExtension(file.FileName);
             var baseUrl = _context.HttpContext.Request.Host;
 
-            if (fileType.ToLower() == ".pdf" || fileType.ToLower() == ".jpg" ||
-                fileType.ToLower() == ".png" || fileType.ToLower() == ".jpeg"|| 
-                fileType.ToLower() == ".exe")
+            if (fileType.ToLower() == ".jpg" ||
+                fileType.ToLower() == ".png" || fileType.ToLower() == ".jpeg")
             {
                 var docName = Path.GetFileName(file.FileName);
                 if (file != null && file.Length > 0)

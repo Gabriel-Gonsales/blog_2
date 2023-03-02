@@ -63,7 +63,7 @@
             return {
                 comments: [],
                 pId: this.id,
-                imagem: this.img,
+                imagem: "https://localhost:51427/UploadDir/" + this.img,
                 titulo: this.ttl,
                 texto: this.txt,
                 comentario: '',

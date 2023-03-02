@@ -3,9 +3,10 @@
     "",
     "\\RestWithASPNETUdemy",
     "\\RestWithASPNETUdemy\\RestWithASPNETUdemy",
+    "\\RestWithASPNETUdemy\\RestWithASPNETUdemy\\Model",
     "\\RestWithASPNETUdemy\\RestWithASPNETUdemy\\Repository",
     "\\RestWithASPNETUdemy\\RestWithASPNETUdemy\\Repository\\Generic"
   ],
-  "SelectedNode": "\\RestWithASPNETUdemy\\RestWithASPNETUdemy\\Repository\\CommentRepository.cs",
+  "SelectedNode": "\\RestWithASPNETUdemy\\RestWithASPNETUdemy\\Model\\Post.cs",
   "PreviewInSolutionExplorer": false
 }
