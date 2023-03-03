@@ -24,7 +24,7 @@
                     <form class="" id="formulario" @submit="createComment()">
                         <input v-model="nome" id="name" placeholder="Seu nome" class="form-control col-12 col-sm-12 col-md-12" type="text" />
                         <br />
-                        <textarea v-model="comentario" id="coment" placeholder="Deixe aqui seu comentário" class="form-control col-12 col-sm-12 col-md-12"></textarea>
+                        <textarea-autosize v-model="comentario" id="coment" placeholder="Deixe aqui seu comentário" class="form-control col-12 col-sm-12 col-md-12"></textarea-autosize>
                         <div class="d-flex justify-content-around">
                             <button type="submit" class="btn btn-danger col-md-4">Submit</button>
                         </div>
@@ -46,6 +46,8 @@
 
 <script>
     import ComentariosPost from './CommentBox.vue'
+    import profiles from '../../../18_RestWithASPNETUdemy_UploadAndDownloadFiles/RestWithASPNETUdemy/RestWithASPNETUdemy/Properties/launchSettings.json'
+
 
     export default {
         name: 'PostForm',
@@ -63,27 +65,23 @@
             return {
                 comments: [],
                 pId: this.id,
-                imagem: "https://localhost:51427/UploadDir/" + this.img,
+                imagem: '',
                 titulo: this.ttl,
                 texto: this.txt,
                 comentario: '',
                 nome: '',
-                data: ''
+                data: '',
+                json: profiles.profiles.RestWithASPNETUdemy.applicationUrl.split(";")
             }
         },
         methods: {
 
             async makePostRequest() {
-                const axios = require('axios');
-                const response = await axios("https://localhost:51427/api/Post/v1");
-                const data = response.data;
-                console.log(data);
-                console.log(data[0]);
-                this.posts = data;
+                this.imagem = this.json[0] + "/UploadDir/" + this.img
             },
             async makeCommentRequest() {
                 const axios = require('axios');
-                const response = await axios("https://localhost:51427/api/Comment/v1/findByPostId?Id=" + this.pId);
+                const response = await axios(this.json[0] + "/api/Comment/v1/findByPostId?Id=" + this.pId);
                 const data = response.data;
                 console.log(data);
                 console.log(data[0]);
@@ -100,7 +98,7 @@
                 }
                 const dataJSON = JSON.stringify(data);
                 console.log(dataJSON);
-                const response = await fetch("https://localhost:51427/api/Comment/v1", {
+                const response = await fetch(this.json[0] + "/api/Comment/v1", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: dataJSON

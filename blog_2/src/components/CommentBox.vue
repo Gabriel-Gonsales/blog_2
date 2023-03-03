@@ -3,7 +3,7 @@
         <div id="coments" class="">
             <br />
             <p class="text-danger">
-                <b class="text-uppercase">{{nome}}</b> em {{DS[0]}} às {{DS[1]}}
+                <b class="text-uppercase">{{nome}}</b> em {{dia}} às {{hora}}
             </p>
             <p class="text-break text-justify">
                 {{comentario}}
@@ -26,13 +26,17 @@
                 comentario: this.cmt,
                 nome: this.name,
                 data: this.date,
-                DS: []
+                DS: [],
+                dia: '',
+                hora: ''
             }
 
         },
         methods: {
             async dataSplit(){
                 this.DS = this.data.split("T");
+                this.dia = this.DS[0];
+                this.hora = this.DS[1];
             }
         },
         created() {

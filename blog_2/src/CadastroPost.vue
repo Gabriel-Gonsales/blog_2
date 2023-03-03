@@ -5,7 +5,7 @@
             <form class="" id="formulario" @submit="createPost()">
                 <input required v-model="titulo" id="titulo" placeholder="Escreva o título" class="form-control col-12 col-sm-12 col-md-12" type="text" />
                 <br />
-                <textarea required v-model="descricao" id="descricao" placeholder="Escreva o conteúdo" class="form-control col-12 col-sm-12 col-md-12"></textarea>
+                <textarea-autosize required v-model="descricao" id="descricao" placeholder="Escreva o conteúdo" class="form-control col-12 col-sm-12 col-md-12"></textarea-autosize>
                 <br />
                 <input required class="form-control" type="file" @change="selecionaArq"/>
                 <div class="d-flex justify-content-around">
@@ -47,7 +47,7 @@
                 if (this.arquivos.length > 1) {
                     console.log(this.arquivos)
                     fd.append('file', this.arquivos)
-                    axios.post('https://localhost:51427/api/File/v1/uploadMultipleFiles', fd, {
+                    axios.post(this.json[0] + '/api/File/v1/uploadMultipleFiles', fd, {
                         onUploadProgress: uploadEvent => {
                             console.log('Progresso: ' + Math.round(uploadEvent.loaded / uploadEvent.total * 100) + '%')
                         }
@@ -60,7 +60,7 @@
                     this.arqNome = this.arquivo.name;
                     console.log(this.arqNome);
                     fd.append('file', this.arquivo, this.arquivo.name)
-                    axios.post('https://localhost:51427/api/File/v1/uploadFile', fd, {
+                    axios.post(this.json[0] + '/api/File/v1/uploadFile', fd, {
                         onUploadProgress: uploadEvent => {
                             console.log('Progresso: ' + Math.round(uploadEvent.loaded / uploadEvent.total * 100) + '%')
                         }
@@ -97,8 +97,6 @@
 
             },
             selecionaArq(event) {
-                console.log(event.target.files);
-                console.log(event.target.files.length)
 
                 if (event.target.files.length > 1) {
                     for (var i = 0; i < event.target.files.length; i++) {
