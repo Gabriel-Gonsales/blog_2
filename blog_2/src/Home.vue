@@ -110,10 +110,18 @@
             },
             async testes() {
                 console.log(this.json[0]);
+            },
+            openNotification(){
+               this.$toast.open({
+                    message: 'Seja bem vindo!',
+                   type: 'info',
+                   position: 'top',
+                   duration: 3000
+               });
             }
-
         },
         created() {
+            //this.openNotification()
             this.makeRequest(),
             this.testes()
         },

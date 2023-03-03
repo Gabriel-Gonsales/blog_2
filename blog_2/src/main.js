@@ -5,13 +5,15 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import VueRouter from 'vue-router';
 import VueSimpleAlert from "vue-simple-alert";
-import TextareaAutosize from 'vue-textarea-autosize'
+import TextareaAutosize from 'vue-textarea-autosize';
+import VueToast from 'vue-toast-notification';
 
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(VueSimpleAlert);
 Vue.use(TextareaAutosize);
+Vue.use(VueToast);
 
 Vue.config.productionTip = false
 
